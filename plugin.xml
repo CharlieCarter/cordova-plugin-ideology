@@ -7,13 +7,10 @@
   <description>Plugin for retrieving Ideology Share extension data</description>
   <license>Apache License, Version 2.0</license>
   <author>Charlie Carter</author>
-  <platform name="ios">
+  <!-- <platform name="ios">
     <config-file target="config.xml" parent="/*">
-        <feature name="Device">
-            <param name="ios-package" value="CDVDevice"/>
-        </feature>
     </config-file>
     <header-file src="src/ios/CDVDevice.h" />
     <source-file src="src/ios/CDVDevice.m" />
-  </platform>
+  </platform> -->
 </plugin>
