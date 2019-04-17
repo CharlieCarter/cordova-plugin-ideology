@@ -5,6 +5,7 @@
     version="0.1">
   <name>Ideology-Plugin</name>
   <description>Plugin for retrieving Ideology Share extension data</description>
+  <license>Apache License, Version 2.0</license>
   <author>Charlie Carter</author>
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
