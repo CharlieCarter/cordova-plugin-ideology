@@ -1,0 +1,34 @@
+{
+  "name": "ideology-plugin",
+  "version": "0.1",
+  "description": "Plugin for retrieving Ideology Share extension data",
+  "cordova": {
+    "id": "ideology-plugin",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlieCarter/ideology-plugin.git"
+  },
+  "keywords": [
+    "Ideology",
+    "Exeter",
+    "unBias",
+    "University of Exeter"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "author": "Charlie Carter",
+  "license": "Apache License, Version 2.0",
+  "bugs": {
+    "url": "https://github.com/CharlieCarter/ideology-plugin/issues"
+  },
+  "homepage": "https://github.com/CharlieCarter/ideology-plugin#readme"
+}

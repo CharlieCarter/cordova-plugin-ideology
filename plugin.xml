@@ -4,6 +4,8 @@
     id="ideology-plugin"
     version="0.1">
   <name>Ideology-Plugin</name>
+  <description>Plugin for retrieving Ideology Share extension data</description>
+  <author>Charlie Carter</author>
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
         <feature name="Device">
