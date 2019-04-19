@@ -1,16 +1,16 @@
 {
-  "name": "cordova-plugin-ideology",
+  "name": "cordova-plugin-unbias",
   "version": "0.0.1",
-  "description": "Plugin for retrieving Ideology Share extension data",
+  "description": "Plugin for retrieving Unbias Share extension data",
   "cordova": {
-    "id": "cordova-plugin-ideology",
+    "id": "cordova-plugin-unbias",
     "platforms": [
       "ios"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CharlieCarter/cordova-plugin-ideology.git"
+    "url": "git+https://github.com/CharlieCarter/cordova-plugin-unbias.git"
   },
   "keywords": [
     "ecosystem:cordova",
@@ -19,7 +19,7 @@
   "author": "Charlie Carter",
   "license": "Apache License, Version 2.0",
   "bugs": {
-    "url": "https://github.com/CharlieCarter/cordova-plugin-ideology/issues"
+    "url": "https://github.com/CharlieCarter/cordova-plugin-unbias/issues"
   },
-  "homepage": "https://github.com/CharlieCarter/cordova-plugin-ideology#readme"
+  "homepage": "https://github.com/CharlieCarter/cordova-plugin-unbias#readme"
 }

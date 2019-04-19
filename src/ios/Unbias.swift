@@ -2,7 +2,7 @@
 /*
  * Notes: The @objc shows that this class & function should be exposed to Cordova.
  */
-@objc(Ideology) class Ideology : CDVPlugin {
+@objc(Unbias) class Unbias : CDVPlugin {
     @objc(test:) // Declare your function name.
     func test(command: CDVInvokedUrlCommand) { // write the function code.
         /*
