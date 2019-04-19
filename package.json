@@ -1,16 +1,16 @@
 {
-  "name": "ideology-plugin",
+  "name": "cordova-plugin-ideology",
   "version": "0.0.1",
   "description": "Plugin for retrieving Ideology Share extension data",
   "cordova": {
-    "id": "ideology-plugin",
+    "id": "cordova-plugin-ideology",
     "platforms": [
       "ios"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CharlieCarter/ideology-plugin.git"
+    "url": "git+https://github.com/CharlieCarter/cordova-plugin-ideology.git"
   },
   "keywords": [
     "ecosystem:cordova",
@@ -19,7 +19,7 @@
   "author": "Charlie Carter",
   "license": "Apache License, Version 2.0",
   "bugs": {
-    "url": "https://github.com/CharlieCarter/ideology-plugin/issues"
+    "url": "https://github.com/CharlieCarter/cordova-plugin-ideology/issues"
   },
-  "homepage": "https://github.com/CharlieCarter/ideology-plugin#readme"
+  "homepage": "https://github.com/CharlieCarter/cordova-plugin-ideology#readme"
 }
