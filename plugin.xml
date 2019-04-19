@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-ideology"
+    id="cordova-plugin-unbias"
     version="0.0.1">
-  <name>Ideology</name>
-  <description>Plugin for retrieving Ideology Share extension data</description>
+  <name>Unbias</name>
+  <description>Plugin for retrieving Unbias Share extension data</description>
   <license>Apache License, Version 2.0</license>
   <author>Charlie Carter</author>
-  <!-- <platform name="ios">
+  
+  <js-module name="Ideology" src="www/Ideology.js">
+    <clobbers target="ideology" />
+  </js-module>
+
+  <platform name="ios">
     <config-file target="config.xml" parent="/*">
     </config-file>
     <header-file src="src/ios/CDVDevice.h" />
-    <source-file src="src/ios/CDVDevice.m" />
-  </platform> -->
+    <source-file src="src/ios/Ideology.swift" />
+  </platform>
 </plugin>
