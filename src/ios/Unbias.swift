@@ -10,9 +10,11 @@ import UIKit
         // Set the plugin result to fail.
         let modelName = UIDevice.modelName
         
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName);
+        let articles = getJSONContents
+        
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName + " \n " + articles);
         // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName);
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName + " \n " + articles);
         // Send the function result back to Cordova.
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
@@ -95,4 +97,67 @@ public extension UIDevice {
         return mapToDevice(identifier: identifier)
     }()
     
+}
+
+func doesJSONExist() -> Bool { // checks if JSON file exists
+    let fileManager = FileManager.default
+    if let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.exeter.Unbias") {
+        let newDirectory = directory.appendingPathComponent("articles")
+        
+        // check if directory exists
+        var isDir : ObjCBool = false
+        if fileManager.fileExists(atPath: newDirectory.path, isDirectory: &isDir) {
+            if (isDir.boolValue) {
+                print("directory exists in app group group.com.exeter.Unbias.")
+            } else {
+                print("directory does not exist in app group group.com.exeter.Unbias.")
+                return false
+            }
+        }
+        
+        // File path with json doc
+        let filePath = newDirectory.appendingPathComponent("articles.json")
+        
+        var doesFileExist = false;
+        
+        doesFileExist = fileManager.fileExists(atPath: filePath.path)
+        print("It is \(doesFileExist) that the file exists at \(filePath.path)")
+        
+        if(doesFileExist) {
+            return true
+        } else {
+            return false
+            print("File does not exist")
+        }
+    }
+    return false
+}
+
+func getJSONContents() -> NSString? { // get contents of JSON file
+    let fileManager = FileManager.default
+    print("In getJSONContents function.")
+    
+    if let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.exeter.Unbias") {
+        let newDirectory = directory.appendingPathComponent("articles")
+        
+        // File path with json doc
+        let filePath = newDirectory.appendingPathComponent("articles.json")
+        
+        // check if shared file already exists
+        let doesFileExist = doesJSONExist();
+        // if it does, then fetch its contents
+        if(doesFileExist) {
+            do {
+                print("Found JSON Contents. Returning.")
+                let contents = try String(contentsOf: filePath) as NSString
+                return(contents)
+            } catch {
+                print(error)
+                return "File does not exist"
+            }
+        } else {
+            print("File does not exist")
+        }
+    }
+    return nil
 }
