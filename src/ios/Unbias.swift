@@ -11,7 +11,7 @@ import Foundation
         // Set the plugin result to fail.
         let modelName = UIDevice.modelName
         
-        if let articles = getJSONContents() {
+        if let articles = getJSONContents() as? String {
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName + " \n " + articles);
             // Set the plugin result to succeed.
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName + " \n " + articles);
