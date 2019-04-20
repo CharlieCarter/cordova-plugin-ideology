@@ -11,13 +11,19 @@ import Foundation
         // Set the plugin result to fail.
         let modelName = UIDevice.modelName
         
-        let articles = getJSONContents
-        
-        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName + " \n " + articles);
-        // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName + " \n " + articles);
-        // Send the function result back to Cordova.
-        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        if let articles = getJSONContents() {
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName + " \n " + articles);
+            // Set the plugin result to succeed.
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName + " \n " + articles);
+            // Send the function result back to Cordova.
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        } else {
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName);
+            // Set the plugin result to succeed.
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName);
+            // Send the function result back to Cordova.
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        }
     }
 }
 
@@ -100,7 +106,7 @@ public extension UIDevice {
     
 }
 
-func doesJSONExist() -> Bool { // checks if JSON file exists
+public func doesJSONExist() -> Bool { // checks if JSON file exists
     let fileManager = FileManager.default
     if let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.exeter.Unbias") {
         let newDirectory = directory.appendingPathComponent("articles")
@@ -134,7 +140,7 @@ func doesJSONExist() -> Bool { // checks if JSON file exists
     return false
 }
 
-func getJSONContents() -> NSString? { // get contents of JSON file
+public func getJSONContents() -> NSString? { // get contents of JSON file
     let fileManager = FileManager.default
     print("In getJSONContents function.")
     
