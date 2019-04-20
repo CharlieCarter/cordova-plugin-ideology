@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 
 @objc(Unbias) class Unbias : CDVPlugin {
     @objc(test:)
