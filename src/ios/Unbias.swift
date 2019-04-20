@@ -1,6 +1,6 @@
 @objc(Unbias) class Unbias : CDVPlugin {
-
-    @objc func test(command: CDVInvokedUrlCommand) { // write the function code.
+    @objc(test:)
+    func test(_ command: CDVInvokedUrlCommand) { // write the function code.
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
