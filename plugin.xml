@@ -14,6 +14,9 @@
 
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
+      <feature name="Unbias">
+        <param name="ios-package" value="Unbias" />
+      </feature>
     </config-file>
     <header-file src="src/ios/CDVDevice.h" />
     <source-file src="src/ios/Unbias.swift" />
