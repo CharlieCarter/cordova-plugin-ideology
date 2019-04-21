@@ -14,9 +14,9 @@ import Foundation
         
         if let articles = getJSONContents() as? String {
             // Set the plugin result to fail.
-            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName + " \n " + articles);
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: articles);
             // Set the plugin result to succeed.
-            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName + " \n " + articles);
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: articles);
             // Send the function result back to Cordova.
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         } else {
