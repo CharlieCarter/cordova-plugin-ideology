@@ -8,19 +8,41 @@ import Foundation
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
          */
-        // Set the plugin result to fail.
+        
+        // get device model name
         let modelName = UIDevice.modelName
         
         if let articles = getJSONContents() as? String {
+            // Set the plugin result to fail.
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName + " \n " + articles);
             // Set the plugin result to succeed.
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName + " \n " + articles);
             // Send the function result back to Cordova.
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         } else {
+            // Set the plugin result to fail.
             var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName);
             // Set the plugin result to succeed.
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName);
+            // Send the function result back to Cordova.
+            self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        }
+    }
+    
+    @objc(delJSON:)
+    func delJSON(_ command: CDVInvokedUrlCommand) { // write the function code.
+        /*
+         * Always assume that the plugin will fail.
+         * Even if in this example, it can't.
+         */
+        
+            deleteArticlesJSON()
+        
+            // Set the plugin result to fail.
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "Delete Json attempt Failed");
+            // Set the plugin result to succeed.
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Delete Json attempt succeeded");
+
             // Send the function result back to Cordova.
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         }
@@ -167,4 +189,41 @@ public func getJSONContents() -> NSString? { // get contents of JSON file
         }
     }
     return nil
+}
+
+
+func deleteArticlesJSON() { // deletes JSON file
+    let fileManager = FileManager.default
+    print("In deleteArticlesJSON function.")
+    
+    if let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.exeter.Unbias") {
+        let newDirectory = directory.appendingPathComponent("articles")
+        
+        // check if directory exists
+        var isDir : ObjCBool = false
+        if fileManager.fileExists(atPath: newDirectory.path, isDirectory: &isDir) {
+            if (isDir.boolValue) {
+                print("directory exists in app group group.com.exeter.Unbias.")
+            } else {
+                print("directory does not exist in app group group.com.exeter.Unbias.")
+                return
+            }
+        }
+        
+        // File path with json doc
+        let filePath = newDirectory.appendingPathComponent("articles.json")
+        var doesFileExist = false;
+        
+        doesFileExist = fileManager.fileExists(atPath: filePath.path)
+        print("It is \(doesFileExist) that the file exists at \(filePath.path)")
+        
+        if(doesFileExist) {
+            do {
+                try fileManager.removeItem(atPath: filePath.path)
+                print("file removed")
+            } catch {
+                print(error)
+            }
+        }
+    }
 }

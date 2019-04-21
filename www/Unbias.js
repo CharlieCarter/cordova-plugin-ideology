@@ -8,4 +8,7 @@ var Unbias = function() {}; // This just makes it easier for us to export all of
 Unbias.test = function(onSuccess, onError) {
    exec(onSuccess, onError, PLUGIN_NAME, "test", []);
 };
+Unbias.delJSON = function(onSuccess, onError) {
+   exec(onSuccess, onError, PLUGIN_NAME, "delJSON", []);
+};
 module.exports = Unbias;
