@@ -46,7 +46,7 @@ import Foundation
             // Send the function result back to Cordova.
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         }
-
+}
 
 
 public extension UIDevice {
