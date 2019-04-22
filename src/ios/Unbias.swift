@@ -21,9 +21,9 @@ import Foundation
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         } else {
             // Set the plugin result to fail.
-            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed on " + modelName);
+            var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAsBool: false);
             // Set the plugin result to succeed.
-            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded on " + modelName);
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAsBool: false);
             // Send the function result back to Cordova.
             self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
         }
