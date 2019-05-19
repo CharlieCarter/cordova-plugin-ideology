@@ -2,7 +2,11 @@ import UIKit
 import Foundation
 
 @objc(Unbias) class Unbias : CDVPlugin {
+<<<<<<< HEAD
     @objc(getArticles:)
+=======
+    @objc(test:)
+>>>>>>> 939b232d7bc3ece90043afb2a8072d220fb785f9
     func getArticles(_ command: CDVInvokedUrlCommand) { // write the function code.
         /*
          * Always assume that the plugin will fail.
