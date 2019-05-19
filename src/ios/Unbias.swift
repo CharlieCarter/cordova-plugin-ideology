@@ -3,7 +3,7 @@ import Foundation
 
 @objc(Unbias) class Unbias : CDVPlugin {
     @objc(test:)
-    func test(_ command: CDVInvokedUrlCommand) { // write the function code.
+    func getArticles(_ command: CDVInvokedUrlCommand) { // write the function code.
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
