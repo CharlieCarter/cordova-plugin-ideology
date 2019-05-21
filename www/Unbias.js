@@ -11,4 +11,7 @@ Unbias.getArticles = function(onSuccess, onError) {
 Unbias.delJSON = function(onSuccess, onError) {
    exec(onSuccess, onError, PLUGIN_NAME, "delJSON", []);
 };
+Unbias.myName = function(onSuccess, onError) {
+   exec(onSuccess, onError, PLUGIN_NAME, "myName", []);
+};
 module.exports = Unbias;
