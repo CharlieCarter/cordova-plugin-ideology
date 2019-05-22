@@ -98,7 +98,7 @@ import Foundation
          * Even if in this example, it can't.
          */
 
-        deleteArticle()
+        // deleteArticle()
 
         // Set the plugin result to fail.
         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "Delete Json attempt Failed");
@@ -192,8 +192,8 @@ func deleteArticlesJSON() { // deletes JSON file
 }
 
 
-func saveStringToJSON(arrayString) { // deletes JSON file
-    let content = arrayString as NSString
+func saveStringToJSON(arrayString: String) { // deletes JSON file
+    let content = arrayString as! NSString
 
     if(doesJSONExist()) {
 
