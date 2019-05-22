@@ -54,12 +54,12 @@ import Foundation
 
          // if there are no remaining articles in the array, delete JSON file
          if (arrayString.isEmpty) {
-           deleteJSON()
+           deleteArticlesJSON()
          }
          // else, write to JSON
          else {
            do {
-             try saveStringToJSON(arrayString)
+             try saveStringToJSON(arrayString: arrayString)
              // Set the plugin result to succeed.
              pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: false);
            }
@@ -193,7 +193,7 @@ func deleteArticlesJSON() { // deletes JSON file
 
 
 func saveStringToJSON(arrayString: String) { // deletes JSON file
-    let content = arrayString as! NSString
+    let content = arrayString as NSString
 
     if(doesJSONExist()) {
 
