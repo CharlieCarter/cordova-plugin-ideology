@@ -52,6 +52,8 @@ import Foundation
 
          let arrayString = command.arguments[0] as? String ?? ""
 
+         print("[SWIFT INFO] arrayString: " + arrayString)
+
          // if there are no remaining articles in the array, delete JSON file
          if (arrayString.isEmpty) {
            deleteArticlesJSON()
