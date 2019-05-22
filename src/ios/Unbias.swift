@@ -40,6 +40,37 @@ import Foundation
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
 
+    @objc(rewriteJsonWithArray:)
+    func rewriteJsonWithArray(_ command: CDVInvokedUrlCommand) { // write the function code.
+        /*
+         * Always assume that the plugin will fail.
+         * Even if in this example, it can't.
+         */
+
+         // Set the plugin result to fail.
+         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: false);
+
+         let arrayString = command.arguments[0] as? String ?? ""
+
+         // if there are no remaining articles in the array, delete JSON file
+         if (arrayString.isEmpty) {
+           deleteJSON()
+         }
+         // else, write to JSON
+         else {
+           do {
+             try saveStringToJSON(arrayString)
+             // Set the plugin result to succeed.
+             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: false);
+           }
+           catch {
+             print("[Error] Error with rewriting JSON: \(error).")
+           }
+         }
+         // Send the function result back to Cordova.
+         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+
     // delete JSON file
     @objc(delJSON:)
     func delJSON(_ command: CDVInvokedUrlCommand) { // write the function code.
@@ -161,8 +192,24 @@ func deleteArticlesJSON() { // deletes JSON file
 }
 
 
-func deleteArticle() { // deletes JSON file
+func saveStringToJSON(arrayString) { // deletes JSON file
+    let content = arrayString as NSString
+
     if(doesJSONExist()) {
 
+      let fileManager = FileManager.default
+      let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.exeter.Unbias")
+      let folder = directory!.appendingPathComponent("articles")
+      let file = folder.appendingPathComponent("articles.json")
+
+      do {
+        print("writing to file")
+
+        // encoding 4 stands for NSUTF8StringEncoding, or 8-bit unicode
+        try content.write(toFile: file.path, atomically: true, encoding: 4)
+
+      } catch {
+          print(error)
+      }
     }
 }

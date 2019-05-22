@@ -14,4 +14,7 @@ Unbias.delJSON = function(onSuccess, onError) {
 Unbias.myName = function(onSuccess, onError) {
    exec(onSuccess, onError, PLUGIN_NAME, "myName", []);
 };
+Unbias.rewriteJsonWithArray = function(arg0, onSuccess, onError) {
+   exec(onSuccess, onError, PLUGIN_NAME, "rewriteJsonWithArray", []);
+};
 module.exports = Unbias;
