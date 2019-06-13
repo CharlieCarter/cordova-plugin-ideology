@@ -1,25 +1,50 @@
 {
-  "name": "cordova-plugin-unbias",
-  "version": "0.0.1",
-  "description": "Plugin for retrieving Unbias Share extension data",
+  "_from": "git+https://github.com/CharlieCarter/cordova-plugin-unbias.git",
+  "_id": "cordova-plugin-unbias@0.0.1",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/cordova-plugin-unbias",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/CharlieCarter/cordova-plugin-unbias.git",
+    "rawSpec": "https://github.com/CharlieCarter/cordova-plugin-unbias.git",
+    "saveSpec": "git+https://github.com/CharlieCarter/cordova-plugin-unbias.git",
+    "fetchSpec": "https://github.com/CharlieCarter/cordova-plugin-unbias.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/CharlieCarter/cordova-plugin-unbias.git#f67b1d4c4a8d53c950290407de37949560a85c1d",
+  "_spec": "https://github.com/CharlieCarter/cordova-plugin-unbias.git",
+  "_where": "/Users/charliecarter/Documents/Ionic_Test/UnbiasArticles",
+  "author": {
+    "name": "Charlie Carter"
+  },
+  "bugs": {
+    "url": "https://github.com/CharlieCarter/cordova-plugin-unbias/issues"
+  },
+  "bundleDependencies": false,
   "cordova": {
     "id": "cordova-plugin-unbias",
     "platforms": [
       "ios"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CharlieCarter/cordova-plugin-unbias.git"
-  },
+  "deprecated": false,
+  "description": "Plugin for retrieving Unbias Share extension data",
+  "homepage": "https://github.com/CharlieCarter/cordova-plugin-unbias#readme",
   "keywords": [
     "ecosystem:cordova",
     "cordova-ios"
   ],
-  "author": "Charlie Carter",
   "license": "Apache License, Version 2.0",
-  "bugs": {
-    "url": "https://github.com/CharlieCarter/cordova-plugin-unbias/issues"
+  "name": "cordova-plugin-unbias",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlieCarter/cordova-plugin-unbias.git"
   },
-  "homepage": "https://github.com/CharlieCarter/cordova-plugin-unbias#readme"
+  "version": "0.0.1"
 }
