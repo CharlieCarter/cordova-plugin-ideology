@@ -3,7 +3,7 @@ import Foundation
 
 @objc(Unbias) class Unbias : CDVPlugin {
     @objc(getArticles:)
-    func getArticles(_ command: CDVInvokedUrlCommand) { // write the function code.
+    func getArticles(_ command: CDVInvokedUrlCommand) {
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
@@ -27,7 +27,7 @@ import Foundation
     }
 
     @objc(myName:)
-    func myName(_ command: CDVInvokedUrlCommand) { // write the function code.
+    func myName(_ command: CDVInvokedUrlCommand) {
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
@@ -41,7 +41,7 @@ import Foundation
     }
 
     @objc(rewriteJsonWithArray:)
-    func rewriteJsonWithArray(_ command: CDVInvokedUrlCommand) { // write the function code.
+    func rewriteJsonWithArray(_ command: CDVInvokedUrlCommand) {
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
@@ -75,7 +75,7 @@ import Foundation
 
     // delete JSON file
     @objc(delJSON:)
-    func delJSON(_ command: CDVInvokedUrlCommand) { // write the function code.
+    func delJSON(_ command: CDVInvokedUrlCommand) {
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
@@ -94,7 +94,7 @@ import Foundation
 
     // delete individual article
     @objc(delArticle:)
-    func delArticle(_ command: CDVInvokedUrlCommand) { // write the function code.
+    func delArticle(_ command: CDVInvokedUrlCommand) {
         /*
          * Always assume that the plugin will fail.
          * Even if in this example, it can't.
@@ -110,7 +110,43 @@ import Foundation
         // Send the function result back to Cordova.
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
+    
+    
+    
+    // get named entities
+    @objc(getPersonEntities:)
+    func getPersonEntities(_ command: CDVInvokedUrlCommand) {
+        /*
+         * Always assume that the plugin will fail.
+         * Even if in this example, it can't.
+         */
+        
+        // Set the plugin result to fail.
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: false);
+        
+        // from document.documentElement.innerText
+        let articletext = command.arguments[0] as? String ?? ""
+
+        do {
+            let entitiesDict = try detectEntities(articletext: articletext)
+            
+            // Set the plugin result to succeed.
+            var pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: entitiesDict);
+            
+        } catch DetectEntitiesError.emptyArticle {
+            print("[detectEntities] Article text is empty");
+        } catch {
+            print("[detectEntities] Error with detecting entities: \(error)");
+        }
+        
+        // Send the function result back to Cordova.
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+    
+    
 }
+
+//  BELOW THIS POINT ARE FUNCTION FOR THE CLASS TO USE, NOT FUNCTION MADE AVAILABLE TO ANGULAR / TYPESCRIPT
 
 public func doesJSONExist() -> Bool { // checks if JSON file exists
     let fileManager = FileManager.default
@@ -215,3 +251,57 @@ func saveStringToJSON(arrayString: String) { // deletes JSON file
       }
     }
 }
+
+
+enum DetectEntitiesError: Error {
+    case emptyArticle
+}
+
+func detectEntities(articleText: String) -> [String: ClassificationResult] {
+    if (articleText.isEmpty) {
+        throw DetectEntitiesError.emptyArticle
+    }
+    
+    // create Named Entity Recognition tagger
+    let tagger = NSLinguisticTagger(tagSchemes: [.nameType], options: 0);
+    tagger.string = articletext;
+    
+    // identify range to be searched (entire article)
+    let range = NSRange(location: 0, length: articletext.utf16.count)
+    //Setting various options, such as ignoring white spaces and punctuations
+    let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+    // restrict tags to those identified as people
+    let tags: [NSLinguisticTag] = [.personalName]
+    
+    // create list to hold entities
+    var entities: [String] = [];
+    
+    tagger.enumerateTags(in: range, unit: .word, scheme: .nameType, options: options) { tag, tokenRange, stop in
+        if let tag = tag, tags.contains(tag) {
+            let name = (articletext as NSString).substring(with: tokenRange)
+            entities.append(name);
+            print("Detected ", name);
+        }
+    }
+    
+    // create empty dictionary to hold name key: gender value
+    var entitiesDict: [String: ClassificationResult];
+    
+    let classificationService = ClassificationService()
+    
+    // convert entities to NSArray so we can process gender of actors concurrently
+    let entitiesNS:NSArray = entities as NSArray
+    entitiesNS.enumerateObjects(options: NSEnumerationOptions.concurrent) {
+        (entityName:Any!, index:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+        entityName = entityName as! String;
+        print("Identified entity name: ", entityName)
+        var gender = classificationService.predictGender(from: entityName)
+        print("Predicted gender: ", gender)
+        entitiesDict.updateValue(forKey: entityName, value: gender)
+    }
+    
+    return entitiesDict;
+}
+
+
+
