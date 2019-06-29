@@ -285,7 +285,7 @@ func detectEntities(articleText: String) throws -> [String: ClassificationResult
     }
     
     // create empty dictionary to hold name key: gender value
-    var entitiesDict: [String: ClassificationResult];
+    var entitiesDict: [String: ClassificationResult] = [];
     
     let classificationService = ClassificationService()
     
@@ -300,12 +300,11 @@ func detectEntities(articleText: String) throws -> [String: ClassificationResult
         
         do {
             gender = try classificationService.predictGender(from: name);
+            print("Predicted gender: ", gender)
+            entitiesDict.updateValue(gender, forKey: name)
         } catch {
             print("Error assigning predicted genders to variable: \(error)");
         }
-        
-        print("Predicted gender: ", gender)
-        entitiesDict.updateValue(gender, forKey: name)
     }
     
     return entitiesDict;
