@@ -23,5 +23,6 @@
     <source-file src="src/ios/ClassificationService.swift" />
     <source-file src="src/ios/ClassificationResult.swift" />
     <source-file src="src/ios/NamesDT.mlmodel" />
+    <source-file src="src/ios/Names.swift" />
   </platform>
 </plugin>

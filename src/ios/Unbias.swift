@@ -295,9 +295,9 @@ func detectEntities(articleText: String) -> [String: ClassificationResult] {
         (entityName:Any!, index:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
         let name = entityName as! String;
         print("Identified entity name: ", name)
-        var gender =
-        try {
-            classificationService.predictGender(from: name)
+        
+        do {
+            var gender = try classificationService.predictGender(from: name);
         } catch {
             print("Error assigning predicted genders to variable: \(error)");
         }
