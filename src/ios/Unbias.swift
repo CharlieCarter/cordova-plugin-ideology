@@ -257,9 +257,9 @@ enum DetectEntitiesError: Error {
     case emptyArticle
 }
 
-func detectEntities(articleText: String) -> [String: ClassificationResult] {
+func detectEntities(articleText: String) throws -> [String: ClassificationResult] {
     if (articleText.isEmpty) {
-        throws DetectEntitiesError.emptyArticle
+        throw DetectEntitiesError.emptyArticle
     }
     
     // create Named Entity Recognition tagger
@@ -296,7 +296,7 @@ func detectEntities(articleText: String) -> [String: ClassificationResult] {
         let name = entityName as! String;
         print("Identified entity name: ", name)
         
-        var gender;
+        var gender: ClassificationResult;
         
         do {
             gender = try classificationService.predictGender(from: name);
