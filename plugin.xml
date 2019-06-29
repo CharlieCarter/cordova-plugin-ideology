@@ -20,5 +20,7 @@
     </config-file>
     <header-file src="src/ios/CDVDevice.h" />
     <source-file src="src/ios/Unbias.swift" />
+    <source-file src="src/ios/ClassificationService.swift" />
+    <source-file src="src/ios/ClassificationResult.swift" />
   </platform>
 </plugin>

@@ -1,6 +1,6 @@
 import CoreML
 
-final class ClassificationService {
+public class ClassificationService {
   enum Error: Swift.Error {
     case unknownGender
     case probabilityMissing(gender: ClassificationResult.Gender)
@@ -10,7 +10,7 @@ final class ClassificationService {
 
   // MARK: - Prediction
 
-  func predictGender(from firstName: String) throws -> ClassificationResult {
+  public func predictGender(from firstName: String) throws -> ClassificationResult {
     let output = try model.prediction(input: features(from: firstName))
 
     guard let gender = ClassificationResult.Gender(rawValue: output.classLabel) else {
@@ -27,7 +27,7 @@ final class ClassificationService {
 
 // MARK: - Features
 
-private extension ClassificationService {
+public extension ClassificationService {
   func features(from string: String) -> [String: Double] {
     guard !string.isEmpty else {
       return [:]

@@ -1,4 +1,4 @@
-struct ClassificationResult {
+public struct ClassificationResult {
   enum Gender: String {
     case male = "M"
     case female = "F"
