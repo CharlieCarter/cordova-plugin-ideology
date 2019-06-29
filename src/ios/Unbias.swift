@@ -305,7 +305,7 @@ func detectEntities(articleText: String) throws -> [String: ClassificationResult
         }
         
         print("Predicted gender: ", gender)
-        entitiesDict.updateValue(value: gender, forKey: name)
+        entitiesDict.updateValue(gender, forKey: name)
     }
     
     return entitiesDict;
