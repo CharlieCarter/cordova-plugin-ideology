@@ -128,7 +128,7 @@ import Foundation
         let articletext = command.arguments[0] as? String ?? ""
 
         do {
-            let entitiesDict = try detectEntities(articletext: articletext)
+            let entitiesDict = try detectEntities(articleText: articletext)
             
             // Set the plugin result to succeed.
             var pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: entitiesDict);
@@ -295,9 +295,15 @@ func detectEntities(articleText: String) -> [String: ClassificationResult] {
         (entityName:Any!, index:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
         let name = entityName as! String;
         print("Identified entity name: ", name)
-        var gender = classificationService.predictGender(from: name)
+        var gender =
+        try {
+            classificationService.predictGender(from: name)
+        } catch {
+            print("Error assigning predicted genders to variable: \(error)");
+        }
+        
         print("Predicted gender: ", gender)
-        entitiesDict.updateValue(forKey: name, value: gender)
+        entitiesDict.updateValue(value: gender, forKey: name)
     }
     
     return entitiesDict;
