@@ -285,7 +285,7 @@ func detectEntities(articleText: String) throws -> [String: ClassificationResult
     }
     
     // create empty dictionary to hold name key: gender value
-    var entitiesDict: [String: ClassificationResult] = [];
+    var entitiesDict: [String: ClassificationResult] = [:];
     
     let classificationService = ClassificationService()
     
