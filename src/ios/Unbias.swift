@@ -259,7 +259,7 @@ enum DetectEntitiesError: Error {
 
 func detectEntities(articleText: String) -> [String: ClassificationResult] {
     if (articleText.isEmpty) {
-        throw DetectEntitiesError.emptyArticle
+        throws DetectEntitiesError.emptyArticle
     }
     
     // create Named Entity Recognition tagger
@@ -278,7 +278,7 @@ func detectEntities(articleText: String) -> [String: ClassificationResult] {
     
     tagger.enumerateTags(in: range, unit: .word, scheme: .nameType, options: options) { tag, tokenRange, stop in
         if let tag = tag, tags.contains(tag) {
-            let name = (articletext as NSString).substring(with: tokenRange)
+            let name = (articleText as NSString).substring(with: tokenRange)
             entities.append(name);
             print("Detected ", name);
         }
