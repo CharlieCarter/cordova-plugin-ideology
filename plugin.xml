@@ -22,5 +22,6 @@
     <source-file src="src/ios/Unbias.swift" />
     <source-file src="src/ios/ClassificationService.swift" />
     <source-file src="src/ios/ClassificationResult.swift" />
+    <source-file src="src/ios/NamesDT.mlmodel" />
   </platform>
 </plugin>

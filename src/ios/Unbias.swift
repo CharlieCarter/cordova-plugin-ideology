@@ -264,10 +264,10 @@ func detectEntities(articleText: String) -> [String: ClassificationResult] {
     
     // create Named Entity Recognition tagger
     let tagger = NSLinguisticTagger(tagSchemes: [.nameType], options: 0);
-    tagger.string = articletext;
+    tagger.string = articleText;
     
     // identify range to be searched (entire article)
-    let range = NSRange(location: 0, length: articletext.utf16.count)
+    let range = NSRange(location: 0, length: articleText.utf16.count)
     //Setting various options, such as ignoring white spaces and punctuations
     let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
     // restrict tags to those identified as people
@@ -293,11 +293,11 @@ func detectEntities(articleText: String) -> [String: ClassificationResult] {
     let entitiesNS:NSArray = entities as NSArray
     entitiesNS.enumerateObjects(options: NSEnumerationOptions.concurrent) {
         (entityName:Any!, index:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-        entityName = entityName as! String;
-        print("Identified entity name: ", entityName)
-        var gender = classificationService.predictGender(from: entityName)
+        let name = entityName as! String;
+        print("Identified entity name: ", name)
+        var gender = classificationService.predictGender(from: name)
         print("Predicted gender: ", gender)
-        entitiesDict.updateValue(forKey: entityName, value: gender)
+        entitiesDict.updateValue(forKey: name, value: gender)
     }
     
     return entitiesDict;
